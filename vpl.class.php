@@ -787,7 +787,8 @@ class mod_vpl {
     function is_submission_period(){
         $now = time();
         $ret = $this->instance->startdate <= $now;
-        return $ret && ($this->instance->duedate == 0 || $this->instance->duedate >= $now);
+	return $ret && ($this->instance->percent_drop !=0 ||
+				$this->instance->duedate == 0 || $this->instance->duedate >= $now);
     }
 
     /**

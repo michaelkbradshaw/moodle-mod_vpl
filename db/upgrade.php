@@ -204,5 +204,40 @@ function xmldb_vpl_upgrade($oldversion = 0) {
         // VPL savepoint reached.
         upgrade_mod_savepoint( true, 2013111512, 'vpl' );
     }
-    return true;
+//    return true;
+//}
+	if ($oldversion < 2015080601) {
+
+        // Define field percent_drop to be added to vpl.
+        $table = new xmldb_table('vpl');
+        $field = new xmldb_field('percent_drop', XMLDB_TYPE_NUMBER, '5, 3', null, XMLDB_NOTNULL, null, '0', 'duedate');
+
+        // Conditionally launch add field percent_drop.
+        if (!$dbman->field_exists($table, $field)) {
+            $dbman->add_field($table, $field);
+        }
+
+        // Vpl savepoint reached.
+        upgrade_mod_savepoint(true, 2015080601 , 'vpl');
+    }
+
+
+if ($oldversion <  2015080602) {
+
+        // Define field must_complete to be added to vpl.
+        $table = new xmldb_table('vpl');
+        $field = new xmldb_field('must_complete', XMLDB_TYPE_INTEGER, '1', null, XMLDB_NOTNULL, null, '0', 'percent_drop');
+
+        // Conditionally launch add field must_complete.
+        if (!$dbman->field_exists($table, $field)) {
+            $dbman->add_field($table, $field);
+        }
+
+        // Vpl savepoint reached.
+        upgrade_mod_savepoint(true, 2015080602, 'vpl');
+    }
+
+
+
+	return true;
 }

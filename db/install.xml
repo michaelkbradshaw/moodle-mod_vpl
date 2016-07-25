@@ -13,8 +13,11 @@
         <FIELD NAME="intro" TYPE="text" LENGTH="medium" NOTNULL="false" SEQUENCE="false" COMMENT="Full description" PREVIOUS="shortdescription" NEXT="introformat"/>
         <FIELD NAME="introformat" TYPE="int" LENGTH="2" NOTNULL="false" DEFAULT="0" SEQUENCE="false" COMMENT="Intro format" PREVIOUS="intro" NEXT="startdate"/>
         <FIELD NAME="startdate" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false" COMMENT="Date the vpl will be avaliable" PREVIOUS="introformat" NEXT="duedate"/>
-        <FIELD NAME="duedate" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false" COMMENT="After this date this vpl instance will not be available" PREVIOUS="startdate" NEXT="maxfiles"/>
-        <FIELD NAME="maxfiles" TYPE="int" LENGTH="4" NOTNULL="false" SEQUENCE="false" COMMENT="Maximum number of files" PREVIOUS="duedate" NEXT="maxfilesize"/>
+        <FIELD NAME="duedate" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false" COMMENT="After this date this vpl instance will not be available" PREVIOUS="startdate" NEXT="percent_drop"/>
+        <FIELD NAME="percent_drop" TYPE="number" LENGTH="5" NOTNULL="true" DEFAULT="0" SEQUENCE="false" DECIMALS="3" COMMENT="The precentage that the grade should drop for each day the lab is late" 
+PREVIOUS="duedate" NEXT="must_complete"/>
+        <FIELD NAME="must_complete" TYPE="int" LENGTH="1" NOTNULL="true" DEFAULT="0" SEQUENCE="false" COMMENT="Indicates that no grade will be recorded unless the assignment has a perfect score (before late penalties)" PREVIOUS="percent_drop" NEXT="maxfiles"/>
+        <FIELD NAME="maxfiles" TYPE="int" LENGTH="4" NOTNULL="false" SEQUENCE="false" COMMENT="Maximum number of files" PREVIOUS="must_complete" NEXT="maxfilesize"/>
         <FIELD NAME="maxfilesize" TYPE="int" LENGTH="10" NOTNULL="false" SEQUENCE="false" COMMENT="Maximum number of bytes per file" PREVIOUS="maxfiles" NEXT="requirednet"/>
         <FIELD NAME="requirednet" TYPE="char" LENGTH="255" NOTNULL="false" SEQUENCE="false" COMMENT="Allowed submissions from" PREVIOUS="maxfilesize" NEXT="password"/>
         <FIELD NAME="password" TYPE="char" LENGTH="255" NOTNULL="false" SEQUENCE="false" COMMENT="Password required to submit" PREVIOUS="requirednet" NEXT="grade"/>
